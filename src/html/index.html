@@ -19,15 +19,19 @@
     <main class="main">
       <form class="main__form" method="GET">
         <input
-          class="main__form-input"
+          class="main__form-input js-input"
           type="text"
           name="input"
           placeholder="Escribe aquí tu serie"
         />
-        <input class="main__form-button" type="button" value="Buscar" />
+        <input
+          class="main__form-button js-button"
+          type="button"
+          value="Buscar"
+        />
       </form>
-      <div class="results">
-        <ul class="results__list"></ul>
+      <div class="list">
+        <ul class="list__results js-results"></ul>
       </div>
     </main>
     <script src="./assets/js/main.js"></script>
