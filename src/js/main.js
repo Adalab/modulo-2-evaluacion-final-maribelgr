@@ -54,12 +54,13 @@ const listenAddItems = () => {
 
 //Crear función para añadir a favoritos: AQUÍ QUIERO IDENTIFICAR EL ELEMENTO CLICADO
 function addFavoriteItem(event) {
+  //Esto es para añadirle la clase con color al background
   const clickedSerie = event.currentTarget;
   //Obtengo el Id de la serie
   const clickedId = event.currentTarget.id;
   //Busco si el id del array de la búsqueda -series- es igual que el id del elemento clicado
   const object = series.find((serie) => serie.show.id === parseInt(clickedId));
-  //Busco el index de la serie para saber si está en favoritos o no
+  //Busco el index de la serie para saber si está en favoritos o no // Situar el id en el index
   const serieIndex = favourites.findIndex(
     (serie) => serie.show.id === parseInt(clickedId)
   );
