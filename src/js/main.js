@@ -19,7 +19,7 @@ function getResults() {
       paintResults();
       //Lamo a la función que ha añadido un evento click a cada li
       listenAddItems();
-      paintfavourites();
+      paintFavourites();
     });
 }
 
@@ -31,7 +31,7 @@ function paintResults() {
     const src = serie.show.image
       ? `${serie.show.image.medium}`
       : "https://via.placeholder.com/210x295/ffffff/666666/?text=TV";
-    result += `<li class="list__results-item" dataId="${serie.show.id}" id="${i}">`;
+    result += `<li class="list__results-item" id="${serie.show.id}">`;
     result += `<div class="list__results-container">`;
     result += `<img class="list__results-img" src="${src}" alt="${serie.show.name}">`;
     result += `<h2 class="list__results-title">${serie.show.name}</h2>`;
@@ -54,44 +54,93 @@ const listenAddItems = () => {
 
 //Crear función para añadir a favoritos: AQUÍ QUIERO IDENTIFICAR EL ELEMENTO CLICADO
 function addFavoriteItem(event) {
+  const clickedSerie = event.currentTarget;
   //Obtengo el Id de la serie
-  let clickedId = event.currentTarget.id;
-  const itemElement = event.currentTarget;
-  //Busco la serie clicada y la añado a favoritos
-  console.log(favourites);
-  if (favourites.indexOf(series[clickedId]) !== -1) {
+  const clickedId = event.currentTarget.id;
+  //Busco si el id del array de la búsqueda -series- es igual que el id del elemento clicado
+  const object = series.find((serie) => serie.show.id === parseInt(clickedId));
+  //Busco el index de la serie para saber si está en favoritos o no
+  const serieIndex = favourites.findIndex(
+    (serie) => serie.show.id === parseInt(clickedId)
+  );
+  if (serieIndex === -1) {
+    favourites.push(object);
+    //añadir clase del background favorito clickedSerie.classlist
+    //quitar clase del background de los elementos que no son favoritos
+    paintFavourites();
+    setInLocalStorage();
   } else {
-    favourites.push(series[clickedId]);
+    favourites.splice(serieIndex, 1);
+    //quitar clase del background de los elementos que no son favoritos
+    //añadir clase del background favorito
+    paintFavourites();
+    setInLocalStorage();
   }
-  console.log(favourites);
-  //Aquí tengo que llamar otra vez a todas las funciones porque quiero que me lo pinte todo en favourites
-  paintResults();
-  listenAddItems();
-  setInLocalStorage();
-  paintfavourites();
 }
 
 //Mostrar listado de favoritos
-function paintfavourites() {
+function paintFavourites() {
   let favouritesResult = "";
+  const resetBtn = document.querySelector(".js-reset-btn");
   for (let i = 0; i < favourites.length; i++) {
-    const favorite = favourites[i];
-    const src = favorite.show.image
-      ? `${favorite.show.image.medium}`
+    const favourite = favourites[i];
+    const src = favourite.show.image
+      ? `${favourite.show.image.medium}`
       : "https://via.placeholder.com/210x295/ffffff/666666/?text=TV";
-    favouritesResult += `<li class="favourites__list-item" dataId="${favorite.show.id}" id="${i}">`;
+    favouritesResult += `<li class="favourites__list-item" id="${favourite.show.id}">`;
     favouritesResult += `<div class="favourites__list-container">`;
-    favouritesResult += `<img class="favourites__list-img" src="${src}" alt="${favorite.show.name}">`;
-    favouritesResult += `<h2 class="favourites__list-title">${favorite.show.name}</h2>`;
+    favouritesResult += `<img class="favourites__list-img" src="${src}" alt="${favourite.show.name}">`;
+    favouritesResult += `<h2 class="favourites__list-title">${favourite.show.name}</h2>`;
     favouritesResult += "</div>";
     favouritesResult += "</li>";
   }
-  console.log(favouritesResult);
+  // console.log(favouritesResult);
   favouritesList.innerHTML = favouritesResult;
+  if (favourites.length === 0) {
+    resetBtn.classList.add("reset-button-hidden");
+  } else {
+    resetBtn.classList.remove("reset-button-hidden");
+  }
+  listenFavouriteItems();
 }
 
-//OJO: VER SI ESTO ESTÁ BIEN AQUÍ O LO TENGO QUE MOVER
-button.addEventListener("click", getResults);
+const listenFavouriteItems = () => {
+  const favouriteItems = document.querySelectorAll(".favourites__list-item");
+  const resetBtn = document.querySelector(".js-reset-btn");
+  //Creo un for para recorrer cada elemento li y poder añadirle el evento click
+  for (const favouriteItem of favouriteItems) {
+    //Le pongo función para que quite de favoritos al item (li) que he clicado
+    favouriteItem.addEventListener("click", removeFavouriteItem);
+  }
+  //En este botón añado el evento para borrar todos los favoritos
+  resetBtn.addEventListener("click", removeAllFavorites);
+};
+
+function removeAllFavorites() {
+  //Reinicio a 0 el listado de favoritos
+  favourites = [];
+  //Borro el localStorage
+  localStorage.removeItem("favourites");
+  //Borro en el html el listado que había creado antes
+  favouritesList.innerHTML = "";
+  paintFavourites();
+}
+
+//Crear función para quitar de favoritos: AQUÍ QUIERO IDENTIFICAR EL ELEMENTO CLICADO
+function removeFavouriteItem(event) {
+  //Obtengo el Id de la serie
+  const clickedId = event.currentTarget.id;
+  //Busco el index de la serie para saber si está en favoritos o no
+  const serieIndex = favourites.findIndex(
+    (serie) => serie.show.id === parseInt(clickedId)
+  );
+
+  favourites.splice(serieIndex, 1);
+  //quitar clase del background de los elementos que no son favoritos
+  //añadir clase del background favorito
+  paintFavourites();
+  setInLocalStorage();
+}
 
 //Recuperar lo que he guardado en favoritos al recargar la página
 const getFromLocalStorage = () => {
@@ -107,8 +156,8 @@ const setInLocalStorage = () => {
   localStorage.setItem("favourites", stringifyfavourites);
 };
 
-getFromLocalStorage();
+button.addEventListener("click", getResults);
 
-//Start API
-getResults();
-paintResults();
+//Start APP
+getFromLocalStorage();
+paintFavourites();

@@ -17,18 +17,33 @@
       <h1>Buscador de series</h1>
     </header>
     <main class="main">
-      <form class="main__form" method="GET">
-        <input
-          class="main__form-input"
-          type="text"
-          name="input"
-          placeholder="Escribe aquí tu serie"
-        />
-        <input class="main__form-button" type="button" value="Buscar" />
-      </form>
-      <div class="results">
-        <ul class="results__list"></ul>
-      </div>
+      <section>
+        <form class="main__form" method="GET">
+          <input
+            class="main__form-input js-input"
+            type="text"
+            name="input"
+            placeholder="Escribe aquí tu serie"
+          />
+          <input
+            class="main__form-button js-button"
+            type="button"
+            value="Buscar"
+          />
+        </form>
+      </section>
+      <section>
+        <div class="favourites">
+          <h2 class="favourites__title">Mis series favoritas</h2>
+          <ul class="favourites__list js-favourites"></ul>
+          <button class="favourites__reset-btn js-reset-btn">
+            Borrar favoritos
+          </button>
+        </div>
+        <div class="list">
+          <ul class="list__results js-results"></ul>
+        </div>
+      </section>
     </main>
     <script src="./assets/js/main.js"></script>
   </body>
