@@ -54,16 +54,19 @@ const listenAddItems = () => {
 
 //Crear función para añadir a favoritos: AQUÍ QUIERO IDENTIFICAR EL ELEMENTO CLICADO
 function addFavoriteItem(event) {
+  //Obtengo el Id de la serie
   let clickedId = event.currentTarget.id;
   const itemElement = event.currentTarget;
-
+  //Busco la serie clicada y la añado a favoritos
   if (favorites.indexOf(series[clickedId]) !== -1) {
   } else {
     favorites.push(series[clickedId]);
   }
   console.log(favorites);
+  //Aquí tengo que llamar otra vez a todas las funciones porque quiero que me lo pinte todo en favorites
   paintResults();
   listenAddItems();
+  setInLocalStorage();
   paintFavorites();
 }
 
@@ -86,4 +89,25 @@ function paintFavorites() {
   favoritesList.innerHTML = favoritesResult;
 }
 
+//OJO: VER SI ESTO ESTÁ BIEN AQUÍ O LO TENGO QUE MOVER
 button.addEventListener("click", getResults);
+
+//Recuperar lo que he guardado en favoritos al recargar la página
+const getFromLocalStorage = () => {
+  const LocalStorageFavorites = localStorage.getItem("favorites");
+  if (LocalStorageFavorites !== null) {
+    favorites = JSON.parse(LocalStorageFavorites);
+  }
+};
+
+//Guardo favorites en el local storage, pasándolo antes a string
+const setInLocalStorage = () => {
+  const stringifyFavorites = JSON.stringify(favorites);
+  localStorage.setItem("favorites", stringifyFavorites);
+};
+
+getFromLocalStorage();
+
+//Start API
+getResults();
+paintResults();
