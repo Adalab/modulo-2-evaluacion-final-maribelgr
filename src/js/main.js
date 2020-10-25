@@ -3,10 +3,10 @@
 const input = document.querySelector(".js-input");
 const button = document.querySelector(".js-button");
 const resultsList = document.querySelector(".js-results");
-const favoritesList = document.querySelector(".js-favorites");
+const favouritesList = document.querySelector(".js-favourites");
 
 let series = [];
-let favorites = [];
+let favourites = [];
 
 //Acceder a la URL para obtener los resultados de la búsqueda
 function getResults() {
@@ -19,7 +19,7 @@ function getResults() {
       paintResults();
       //Lamo a la función que ha añadido un evento click a cada li
       listenAddItems();
-      paintFavorites();
+      paintfavourites();
     });
 }
 
@@ -58,35 +58,36 @@ function addFavoriteItem(event) {
   let clickedId = event.currentTarget.id;
   const itemElement = event.currentTarget;
   //Busco la serie clicada y la añado a favoritos
-  if (favorites.indexOf(series[clickedId]) !== -1) {
+  console.log(favourites);
+  if (favourites.indexOf(series[clickedId]) !== -1) {
   } else {
-    favorites.push(series[clickedId]);
+    favourites.push(series[clickedId]);
   }
-  console.log(favorites);
-  //Aquí tengo que llamar otra vez a todas las funciones porque quiero que me lo pinte todo en favorites
+  console.log(favourites);
+  //Aquí tengo que llamar otra vez a todas las funciones porque quiero que me lo pinte todo en favourites
   paintResults();
   listenAddItems();
   setInLocalStorage();
-  paintFavorites();
+  paintfavourites();
 }
 
 //Mostrar listado de favoritos
-function paintFavorites() {
-  let favoritesResult = "";
-  for (let i = 0; i < favorites.length; i++) {
-    const favorite = favorites[i];
+function paintfavourites() {
+  let favouritesResult = "";
+  for (let i = 0; i < favourites.length; i++) {
+    const favorite = favourites[i];
     const src = favorite.show.image
       ? `${favorite.show.image.medium}`
       : "https://via.placeholder.com/210x295/ffffff/666666/?text=TV";
-    favoritesResult += `<li class="favorites__list-item" dataId="${favorite.show.id}" id="${i}">`;
-    favoritesResult += `<div class="favorites__list-container">`;
-    favoritesResult += `<img class="favorites__list-img" src="${src}" alt="${favorite.show.name}">`;
-    favoritesResult += `<h2 class="favorites__list-title">${favorite.show.name}</h2>`;
-    favoritesResult += "</div>";
-    favoritesResult += "</li>";
+    favouritesResult += `<li class="favourites__list-item" dataId="${favorite.show.id}" id="${i}">`;
+    favouritesResult += `<div class="favourites__list-container">`;
+    favouritesResult += `<img class="favourites__list-img" src="${src}" alt="${favorite.show.name}">`;
+    favouritesResult += `<h2 class="favourites__list-title">${favorite.show.name}</h2>`;
+    favouritesResult += "</div>";
+    favouritesResult += "</li>";
   }
-  console.log(favoritesResult);
-  favoritesList.innerHTML = favoritesResult;
+  console.log(favouritesResult);
+  favouritesList.innerHTML = favouritesResult;
 }
 
 //OJO: VER SI ESTO ESTÁ BIEN AQUÍ O LO TENGO QUE MOVER
@@ -94,16 +95,16 @@ button.addEventListener("click", getResults);
 
 //Recuperar lo que he guardado en favoritos al recargar la página
 const getFromLocalStorage = () => {
-  const LocalStorageFavorites = localStorage.getItem("favorites");
-  if (LocalStorageFavorites !== null) {
-    favorites = JSON.parse(LocalStorageFavorites);
+  const LocalStoragefavourites = localStorage.getItem("favourites");
+  if (LocalStoragefavourites !== null) {
+    favourites = JSON.parse(LocalStoragefavourites);
   }
 };
 
-//Guardo favorites en el local storage, pasándolo antes a string
+//Guardo favourites en el local storage, pasándolo antes a string
 const setInLocalStorage = () => {
-  const stringifyFavorites = JSON.stringify(favorites);
-  localStorage.setItem("favorites", stringifyFavorites);
+  const stringifyfavourites = JSON.stringify(favourites);
+  localStorage.setItem("favourites", stringifyfavourites);
 };
 
 getFromLocalStorage();
