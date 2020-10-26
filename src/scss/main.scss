@@ -42,7 +42,7 @@ body {
   margin: 30px;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: right;
 
   &__form {
     display: inline-block;
@@ -59,7 +59,7 @@ body {
 
   &__form-input {
     font-family: "Sigmar One", cursive;
-    color: #114e4e;
+    color: #f9f4dc;
     background-color: rgba(17, 78, 78, 0.9);
     border: 2px solid #114e4e;
     border-radius: 5px;
@@ -109,8 +109,9 @@ body {
 }
 
 .results-container {
-  width: auto;
+  width: 750px;
   display: inline-block;
+  flex-wrap: wrap;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -124,10 +125,11 @@ body {
 }
 
 .list__results {
-  text-decoration: none;
-  // display: inline-block;
+  list-style: none;
+  display: inline-block;
+  flex-wrap: wrap;
   &__results-item {
-    text-decoration: none;
+    list-style: none;
     display: block;
     background-color: rgba(232, 198, 189, 0.95);
     padding: 20px;
@@ -139,8 +141,11 @@ body {
 
 .reset-button-hidden {
   display: none;
+}
+
+.favourites__reset-btn {
   font-family: "Sigmar One", cursive;
-  font-size: 20px;
+  font-size: 15px;
   color: #114e4e;
   border: 2px solid #114e4e;
   border-radius: 5px;

@@ -49,17 +49,14 @@ function paintResults() {
   }
 }
 
-//Creo función que añada los listener a los li recorriendo cada uno de ellos. A esta función la tengo que llamar dentro del 2º then, (como a la funcion de pintar los li) porque es cuando se genera la búsqueda y se pintan los resultados
 const listenAddItems = () => {
   const items = document.querySelectorAll(".list__results-item");
-  //Creo un for para recorrer cada elemento li y poder añadirle el evento click
+
   for (const item of items) {
-    //Le pongo función para que le añada clase de favoritos al item (li) que he clicado
     item.addEventListener("click", addFavoriteItem);
   }
 };
 
-//Crear función para añadir a favoritos: AQUÍ QUIERO IDENTIFICAR EL ELEMENTO CLICADO
 function addFavoriteItem(event) {
   //Esto es para añadirle la clase con color al background
   const clickedSerie = event.currentTarget;
@@ -164,4 +161,5 @@ button.addEventListener("click", getResults);
 
 //Start APP
 getFromLocalStorage();
+paintResults();
 paintFavourites();
