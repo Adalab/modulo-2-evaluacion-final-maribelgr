@@ -38,8 +38,15 @@ function paintResults() {
     result += "</div>";
     result += "</li>";
   }
-  // console.log(result);
   resultsList.innerHTML = result;
+
+  if (series.length === 0) {
+    const resultContainer = document.querySelector(".js-results-container");
+    resultContainer.classList.add("results-container-hidden");
+  } else {
+    const resultContainer = document.querySelector(".js-results-container");
+    resultContainer.classList.remove("results-container-hidden");
+  }
 }
 
 //Creo función que añada los listener a los li recorriendo cada uno de ellos. A esta función la tengo que llamar dentro del 2º then, (como a la funcion de pintar los li) porque es cuando se genera la búsqueda y se pintan los resultados
@@ -66,14 +73,10 @@ function addFavoriteItem(event) {
   );
   if (serieIndex === -1) {
     favourites.push(object);
-    //añadir clase del background favorito clickedSerie.classlist
-    //quitar clase del background de los elementos que no son favoritos
     paintFavourites();
     setInLocalStorage();
   } else {
     favourites.splice(serieIndex, 1);
-    //quitar clase del background de los elementos que no son favoritos
-    //añadir clase del background favorito
     paintFavourites();
     setInLocalStorage();
   }

@@ -1,34 +1,152 @@
-// @import 'core/variables';
-// @import 'core/reset';
-// @import 'components/links';
-// @import 'layout/page';
-// @import 'layout/header';
-// @import 'layout/footer';
-// @import 'pages/index';
+$colorBrand04: #438792;
+$colorBrand05: #114e4e;
+
+$colorBrand01: #e17334;
+$colorBrand02: #f9f4dc;
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
 body {
   height: 100vh;
-  width: 100vh;
-  background-image: url("../images/green_texture-_Vintage_Series_Desktop_Wallpaper_1366x768.jpg");
+  width: 100%;
+  background-image: url("https://i.pinimg.com/originals/6d/37/15/6d3715f4ce20a0957577253d1bc86ef1.jpg");
   background-position: center;
   background-size: cover;
   // background-repeat: no-repeat;
 }
 
 .header {
-  width: max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__container {
+    margin: 20px;
+    background-color: rgba(245, 245, 245, 0.85);
+    border-radius: 10px;
+  }
+  &__title {
+    color: #114e4e;
+    font-family: "Sigmar One", cursive;
+    font-size: 50px;
+    padding: 10px 50px;
+  }
+}
+
+.main {
+  margin: 30px;
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  background-color: yellow;
+  justify-content: space-around;
 
-  &__title {
-    color: whitesmoke;
+  &__form {
+    display: inline-block;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     font-family: "Sigmar One", cursive;
-    font-size: 60px;
+    color: #114e4e;
+    background-color: rgba(245, 245, 245, 0.85);
+    border-radius: 10px;
+    padding: 30px;
+    margin-bottom: 30px;
+  }
+
+  &__form-input {
+    font-family: "Sigmar One", cursive;
+    color: #114e4e;
+    background-color: rgba(17, 78, 78, 0.9);
+    border: 2px solid #114e4e;
+    border-radius: 5px;
+    padding: 4px;
+  }
+  &__form-input::placeholder {
+    color: #f9f4dc;
+    padding: 4px;
+  }
+
+  &__form-button {
+    font-family: "Sigmar One", cursive;
+    font-size: 20px;
+    color: #114e4e;
+    border: 2px solid #114e4e;
+    border-radius: 5px;
+    padding: 4px;
+  }
+}
+.search-section {
+  width: 402px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.favourites {
+  display: inline-block;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(245, 245, 245, 0.85);
+  border-radius: 10px;
+  padding: 30px;
+  color: #114e4e;
+  font-family: "Sigmar One", cursive;
+
+  &__list-item {
+    text-decoration: none;
+    display: block;
+    background-color: rgba(232, 198, 189, 0.95);
+    padding: 20px;
+    font-size: 12px;
+    margin: 25px;
+    border-radius: 20px;
+  }
+}
+
+.results-container {
+  width: auto;
+  display: inline-block;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(245, 245, 245, 0.85);
+  border-radius: 10px;
+  padding: 30px;
+  color: #114e4e;
+  font-family: "Sigmar One", cursive;
+  margin-left: 30px;
+  text-decoration: none;
+}
+
+.list__results {
+  text-decoration: none;
+  // display: inline-block;
+  &__results-item {
+    text-decoration: none;
+    display: block;
+    background-color: rgba(232, 198, 189, 0.95);
+    padding: 20px;
+    font-size: 12px;
+    margin: 20px;
+    border-radius: 20px;
   }
 }
 
 .reset-button-hidden {
+  display: none;
+  font-family: "Sigmar One", cursive;
+  font-size: 20px;
+  color: #114e4e;
+  border: 2px solid #114e4e;
+  border-radius: 5px;
+  padding: 4px;
+}
+
+.results-container-hidden {
   display: none;
 }

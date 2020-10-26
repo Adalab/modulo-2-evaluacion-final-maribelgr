@@ -14,10 +14,12 @@
 
   <body>
     <header class="header">
-      <h1 class="header__title">Buscador de series</h1>
+      <div class="header__container">
+        <h1 class="header__title">Buscador de series</h1>
+      </div>
     </header>
     <main class="main">
-      <section>
+      <section class="search-section">
         <form class="main__form" method="GET">
           <input
             class="main__form-input js-input"
@@ -40,7 +42,7 @@
         </div>
       </section>
       <section>
-        <div class="list">
+        <div class="js-results-container results-container">
           <ul class="list__results js-results"></ul>
         </div>
       </section>
