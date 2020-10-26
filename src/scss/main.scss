@@ -6,6 +6,29 @@
 // @import 'layout/footer';
 // @import 'pages/index';
 
+body {
+  height: 100vh;
+  width: 100vh;
+  background-image: url("../images/green_texture-_Vintage_Series_Desktop_Wallpaper_1366x768.jpg");
+  background-position: center;
+  background-size: cover;
+  // background-repeat: no-repeat;
+}
+
+.header {
+  width: max-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: yellow;
+
+  &__title {
+    color: whitesmoke;
+    font-family: "Sigmar One", cursive;
+    font-size: 60px;
+  }
+}
+
 .reset-button-hidden {
   display: none;
 }
