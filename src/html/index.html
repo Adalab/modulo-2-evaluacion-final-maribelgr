@@ -1,52 +1,42 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Buscador de series</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Sigmar+One&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="./assets/css/main.css" />
-    <link rel="icon" href="./assets/images/favicon.png" />
-  </head>
 
-  <body>
-    <header class="header">
-      <div class="header__container">
-        <h1 class="header__title">Buscador de series</h1>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="https://icons8.com/icon/80474/retro-tv" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Buscador de series</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sigmar+One&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets/css/main.css" />
+</head>
+
+<body>
+  <header class="header">
+    <div class="header__container">
+      <h1 class="header__title">Buscador de series</h1>
+    </div>
+  </header>
+  <main class="main">
+    <section class="search-section">
+      <form class="main__form" method="GET">
+        <input class="main__form-input js-input" type="text" name="input" placeholder="Escribe aquí tu serie" />
+        <input class="main__form-button js-button" type="button" value="Buscar" />
+      </form>
+      <div class="favourites">
+        <h2 class="favourites__title">Mis series favoritas</h2>
+        <ul class="favourites__list js-favourites"></ul>
+        <button class="favourites__reset-btn js-reset-btn">
+          Borrar favoritos
+        </button>
       </div>
-    </header>
-    <main class="main">
-      <section class="search-section">
-        <form class="main__form" method="GET">
-          <input
-            class="main__form-input js-input"
-            type="text"
-            name="input"
-            placeholder="Escribe aquí tu serie"
-          />
-          <input
-            class="main__form-button js-button"
-            type="button"
-            value="Buscar"
-          />
-        </form>
-        <div class="favourites">
-          <h2 class="favourites__title">Mis series favoritas</h2>
-          <ul class="favourites__list js-favourites"></ul>
-          <button class="favourites__reset-btn js-reset-btn">
-            Borrar favoritos
-          </button>
-        </div>
-      </section>
-      <section>
-        <div class="js-results-container results-container">
-          <ul class="list__results js-results"></ul>
-        </div>
-      </section>
-    </main>
-    <script src="./assets/js/main.js"></script>
-  </body>
+    </section>
+    <section>
+      <div class="js-results-container results-container">
+        <ul class="list__results js-results"></ul>
+      </div>
+    </section>
+  </main>
+  <script src="./assets/js/main.js"></script>
+</body>
+
 </html>
